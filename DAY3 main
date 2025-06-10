@@ -1,0 +1,63 @@
+package day3;
+
+import java.util.Scanner;
+
+class BankAccount {
+
+    public int total;
+    Scanner s = new Scanner(System.in);
+
+    void accountDetails() {
+        System.out.println("Account holder name: Harish");
+        System.out.println("Account balance: " + total);
+    }
+
+    void withdrawMoney() {
+        int draw;
+        System.out.println("Enter the amount you want to withdraw:");
+        draw = s.nextInt();
+        total = total - draw;
+        System.out.println("Balance after withdrawal: " + total);
+    }
+
+    void depositMoney() {
+        int deposit;
+        System.out.println("Enter the amount to deposit:");
+        deposit = s.nextInt();
+        total = total + deposit;
+        System.out.println("Balance after deposit: " + total);
+    }
+}
+
+public class Main {
+    public static void main(String args[]) {
+        BankAccount bank = new BankAccount();
+        Scanner s = new Scanner(System.in);
+
+        System.out.println("Enter the starting balance:");
+        bank.total = s.nextInt();
+
+        while (true) {
+            System.out.println("\n1. Withdraw");
+            System.out.println("2. Deposit");
+            System.out.println("3. Account Details");
+            System.out.println("4. Exit");
+            System.out.print("Enter your option: ");
+            int opt = s.nextInt();
+
+            if (opt == 1)
+                bank.withdrawMoney();
+            else if (opt == 2)
+                bank.depositMoney();
+            else if (opt == 3)
+                bank.accountDetails();
+            else if (opt == 4) {
+                System.out.println("Exited.");
+                break;
+            } else {
+                System.out.println("Invalid option, try again.");
+            }
+        }
+        s.close();
+    }
+}
