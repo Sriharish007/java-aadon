@@ -1,0 +1,31 @@
+import java.util.Scanner;
+class Student {
+private String name;
+private int rollNumber, marks;
+public Student(String name, int rollNumber) {
+this.name = name;
+this.rollNumber = rollNumber;
+}
+public void setMarks(int marks) {
+if (marks >= 0 && marks <= 100) this.marks = marks;
+else System.out.println("Invalid marks. Enter 0-100.");
+}
+public void displayDetails() {
+System.out.printf("Name: \nRoll No: \nMarks: \n", name, rollNumber, marks);
+}
+}
+public class StudentManagement {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print("Name: ");
+String name = sc.nextLine();
+System.out.print("Roll No: ");
+int roll = sc.nextInt();
+Student s = new Student(name, roll);
+System.out.print("Marks: ");
+s.setMarks(sc.nextInt());
+System.out.println("\nStudent Details:");
+s.displayDetails();
+sc.close();
+}
+}
