@@ -1,0 +1,25 @@
+package day3;
+import java.util.*;
+
+public class Error {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the value of a");
+        int a = in.nextInt();
+        int b = 0;
+
+        int result;
+
+        try {
+            System.out.println("Divide " + a + " by " + b);
+            result = a / b;
+            System.out.println("Result is: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Cannot divide by zero!");
+        }
+
+        in.close();
+        System.out.println("Program continues after try-catch.");
+    }
+}
