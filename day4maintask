@@ -33,8 +33,6 @@ public class StudentFileProcessor {
         }
 
         double average = total > 0 ? (double) sum / total : 0;
-
-        // Step 3: Write result to another file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write("Total Students: " + total + "\n");
             writer.write("Average Roll Number: " + average + "\n");
