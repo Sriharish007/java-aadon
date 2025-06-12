@@ -1,0 +1,160 @@
+import java.io.*;
+import java.util.*;
+
+public class EmployeeCRUD {
+    static final String FILE_NAME = "employees.txt";
+
+    public static void createEmployee(String id, String name, String designation, String salary) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true));
+        writer.write(id + "," + name + "," + designation + "," + salary);
+        writer.newLine();
+        writer.close();
+        System.out.println("Employee added successfully.");
+    }
+
+    public static void readEmployees() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
+        String line;
+        System.out.println("ID\tName\tDesignation\tSalary");
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length == 4) {
+                System.out.println(parts[0] + "\t" + parts[1] + "\t" + parts[2] + "\t\t" + parts[3]);
+            }
+        }
+        reader.close();
+    }
+
+    public static void updateEmployee(String id, String newName, String newDesignation, String newSalary) throws IOException {
+        File inputFile = new File(FILE_NAME);
+        File tempFile = new File("temp.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+        String line;
+        boolean found = false;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts[0].equals(id)) {
+                writer.write(id + "," + newName + "," + newDesignation + "," + newSalary);
+                found = true;
+            } else {
+                writer.write(line);
+            }
+            writer.newLine();
+        }
+
+        reader.close();
+        writer.close();
+
+        if (found) {
+            if (inputFile.delete() && tempFile.renameTo(inputFile)) {
+                System.out.println("Employee updated successfully.");
+            } else {
+                System.out.println("Error updating employee.");
+            }
+        } else {
+            tempFile.delete();
+            System.out.println("Employee ID not found.");
+        }
+    }
+
+    public static void deleteEmployee(String id) throws IOException {
+        File inputFile = new File(FILE_NAME);
+        File tempFile = new File("temp.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+        String line;
+        boolean found = false;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (!parts[0].equals(id)) {
+                writer.write(line);
+                writer.newLine();
+            } else {
+                found = true;
+            }
+        }
+
+        reader.close();
+        writer.close();
+
+        if (found) {
+            if (inputFile.delete() && tempFile.renameTo(inputFile)) {
+                System.out.println("Employee deleted successfully.");
+            } else {
+                System.out.println("Error deleting employee.");
+            }
+        } else {
+            tempFile.delete();
+            System.out.println("Employee ID not found.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n--- Employee Record System ---");
+            System.out.println("1. Add Employee");
+            System.out.println("2. Show Employees");
+            System.out.println("3. Update Employee");
+            System.out.println("4. Delete Employee");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            try {
+                switch (option) {
+                    case 1:
+                        System.out.print("Enter ID: ");
+                        String id = scanner.nextLine();
+                        System.out.print("Enter Name: ");
+                        String name = scanner.nextLine();
+                        System.out.print("Enter Designation: ");
+                        String designation = scanner.nextLine();
+                        System.out.print("Enter Salary: ");
+                        String salary = scanner.nextLine();
+                        createEmployee(id, name, designation, salary);
+                        break;
+
+                    case 2:
+                        readEmployees();
+                        break;
+
+                    case 3:
+                        System.out.print("Enter ID to update: ");
+                        String updateId = scanner.nextLine();
+                        System.out.print("Enter new Name: ");
+                        String newName = scanner.nextLine();
+                        System.out.print("Enter new Designation: ");
+                        String newDesignation = scanner.nextLine();
+                        System.out.print("Enter new Salary: ");
+                        String newSalary = scanner.nextLine();
+                        updateEmployee(updateId, newName, newDesignation, newSalary);
+                        break;
+
+                    case 4:
+                        System.out.print("Enter ID to delete: ");
+                        String deleteId = scanner.nextLine();
+                        deleteEmployee(deleteId);
+                        break;
+
+                    case 5:
+                        System.out.println("Exiting...");
+                        scanner.close();
+                        return;
+
+                    default:
+                        System.out.println("Invalid option. Try again.");
+                }
+            } catch (IOException e) {
+                System.out.println("File error: " + e.getMessage());
+            }
+        }
+    }
+}
