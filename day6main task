@@ -9,36 +9,34 @@ public class StudentApp {
         while (true) {
             System.out.println("\n1.Add\n2.Course\n3.Search\n4.Delete\n5.Save\n6.Exit");
             switch (sc.nextInt()) {
-                case 1 -> {
-                    sc.nextLine();
-                    System.out.print("ID: "); String id = sc.nextLine();
-                    data.put(id, new ArrayList<>()); System.out.println("Student added.");
-                }
+                case 1 -> data.put(prompt(sc, "ID: "), new ArrayList<>());
                 case 2 -> {
-                    sc.nextLine();
-                    System.out.print("ID: "); String id = sc.nextLine();
-                    System.out.print("Course: "); String c = sc.nextLine();
-                    data.getOrDefault(id, new ArrayList<>()).add(c);
-                    System.out.println("Course added.");
+                    String id = prompt(sc, "ID: "), course = prompt(sc, "Course: ");
+                    data.computeIfAbsent(id, k -> new ArrayList<>()).add(course);
                 }
-                case 3 -> {
-                    sc.nextLine();
-                    System.out.print("ID: "); String id = sc.nextLine();
-                    System.out.println(data.getOrDefault(id, List.of("No record")));
-                }
+                case 3 -> System.out.println(data.getOrDefault(prompt(sc, "ID: "), List.of("No record")));
                 case 4 -> {
-                    sc.nextLine();
-                    System.out.print("ID: "); String id = sc.nextLine();
-                    data.remove(id); System.out.println("Deleted.");
+                    data.remove(prompt(sc, "ID: "));
+                    System.out.println("Deleted.");
                 }
                 case 5 -> {
-                    BufferedWriter w = new BufferedWriter(new FileWriter("courses.txt"));
-                    for (var e : data.entrySet())
-                        w.write(e.getKey() + " -> " + e.getValue() + "\n");
-                    w.close(); System.out.println("Saved.");
+                    try (BufferedWriter w = new BufferedWriter(new FileWriter("courses.txt"))) {
+                        for (var e : data.entrySet())
+                            w.write(e.getKey() + " -> " + e.getValue() + "\n");
+                    }
+                    System.out.println("Saved.");
                 }
                 case 6 -> System.exit(0);
             }
         }
     }
+
+    static String prompt(Scanner sc, String msg) {
+        System.out.print(msg);
+        sc.nextLine(); // consume newline
+        return sc.nextLine();
+    }
 }
+
+
+
