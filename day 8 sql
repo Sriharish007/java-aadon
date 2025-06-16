@@ -1,0 +1,274 @@
+mysql> showdatabases
+    -> create database employee
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'showdatabases
+create database employee' at line 1
+mysql> create database employee;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| library            |
+| librarys           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> create table employee()
+    -> empid(INT primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+empid(INT primary key' at line 1
+mysql> create table employee(empid int primary key,name varchar(23),dept varchar(25),salary int,join_date date);
+ERROR 1046 (3D000): No database selected
+mysql> use database employee
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use employee
+Database changed
+mysql> create table employee(empid int primary key,name varchar(23),dept varchar(25),salary int,join_date date);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| empid     | int         | NO   | PRI | NULL    |       |
+| name      | varchar(23) | YES  |     | NULL    |       |
+| dept      | varchar(25) | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| join_date | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> insert into employees(empid,name,department,salary,joindate)values
+    -> (01,harish,finance,50000,20232-06-07),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into employees(empid,name,department,salary,joindate)values
+    -> (01,harish,finance,50000,2022-06-07),
+    -> (01,vivin,marketing,50000,2021-03-06),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> (02,vivin,marketing,50000,2021-03-06),
+    -> (03,sri,marketing,40000,2020-06-09),
+    -> (03,sri,ful;l_stack,45000,2022-07-07),
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '02,vivin,marketing,50000,2021-03-06),
+(03,sri,marketing,40000,2020-06-09),
+(03,s' at line 1
+    -> insert into employees(empid,name,department,salary,joindate)values
+    -> (01,'harish','finance',50000,'20232-06-07'),
+    -> (01,'harish','finance',50000,'2021-02-09');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'l_stack,45000,2022-07-07),
+insert into employees(empid,name,department,salary,jo' at line 1
+mysql> (01,'harish','finance',50000,'2021-02-09');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '01,'harish','finance',50000,'2021-02-09')' at line 1
+mysql> (01,'harish','finance',50000,'2021-02-09');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '01,'harish','finance',50000,'2021-02-09')' at line 1
+mysql> select * employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee' at line 1
+mysql> select * from  employee;
+Empty set (0.00 sec)
+
+mysql> insert into employees(empid,name,department,salary,joindate)values
+    -> (01,'vivin','marketing',50000,'2021-03-06'),
+    -> (02,'harish','hr',60000,'2018-01-09'),
+    -> (03,'sri','full_stack',70000,'2019-07-29'),
+    -> (04,'nawaz','full_stack',80000,'2021-03-19'),
+    -> (05,'arun','full_stack',85000,'2022-02-16'),
+    -> (06,'vijay','wd',85000,'2023-06-15');
+ERROR 1146 (42S02): Table 'employee.employees' doesn't exist
+mysql> insert into employee(empid,name,department,salary,joindate)values
+    -> (01,'vivin','marketing',50000,'2021-03-06'),
+    -> (02,'harish','hr',60000,'2018-01-09'),
+    -> (03,'sri','full_stack',70000,'2019-07-29'),
+    -> (04,'nawaz','full_stack',80000,'2021-03-19'),
+    -> (05,'arun','full_stack',85000,'2022-02-16'),
+    -> (06,'vijay','wd',85000,'2023-06-15');
+ERROR 1054 (42S22): Unknown column 'department' in 'field list'
+mysql> insert into employee(empid,name,dept,salary,joindate)values
+    -> (01,'vivin','marketing',50000,'2021-03-06'),
+    -> (02,'harish','hr',60000,'2018-01-09'),
+    -> (03,'sri','full_stack',70000,'2019-07-29'),
+    -> (04,'nawaz','full_stack',80000,'2021-03-19'),
+    -> (05,'arun','full_stack',85000,'2022-02-16'),
+    -> (06,'vijay','wd',85000,'2023-06-15');
+ERROR 1054 (42S22): Unknown column 'joindate' in 'field list'
+mysql> insert into employee(empid,name,department,salary,join_date)values
+    -> (01,'vivin','marketing',50000,'2021-03-06'),
+    -> (02,'harish','hr',60000,'2018-01-09'),
+    -> (03,'sri','full_stack',70000,'2019-07-29'),
+    -> (04,'nawaz','full_stack',80000,'2021-03-19'),
+    -> (05,'arun','full_stack',85000,'2022-02-16'),
+    -> (06,'vijay','wd',85000,'2023-06-15');
+ERROR 1054 (42S22): Unknown column 'department' in 'field list'
+mysql> insert into employee(empid,name,dept,salary,join_date)values
+    -> (01,'vivin','marketing',50000,'2021-03-06'),
+    -> (02,'harish','hr',60000,'2018-01-09'),
+    -> (03,'sri','full_stack',70000,'2019-07-29'),
+    -> (04,'nawaz','full_stack',80000,'2021-03-19'),
+    -> (05,'arun','full_stack',85000,'2022-02-16'),
+    -> (06,'vijay','wd',85000,'2023-06-15');
+Query OK, 6 rows affected (0.03 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++-------+--------+------------+--------+------------+
+| empid | name   | dept       | salary | join_date  |
++-------+--------+------------+--------+------------+
+|     1 | vivin  | marketing  |  50000 | 2021-03-06 |
+|     2 | harish | hr         |  60000 | 2018-01-09 |
+|     3 | sri    | full_stack |  70000 | 2019-07-29 |
+|     4 | nawaz  | full_stack |  80000 | 2021-03-19 |
+|     5 | arun   | full_stack |  85000 | 2022-02-16 |
+|     6 | vijay  | wd         |  85000 | 2023-06-15 |
++-------+--------+------------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where dept = 'full_stack';
++-------+-------+------------+--------+------------+
+| empid | name  | dept       | salary | join_date  |
++-------+-------+------------+--------+------------+
+|     3 | sri   | full_stack |  70000 | 2019-07-29 |
+|     4 | nawaz | full_stack |  80000 | 2021-03-19 |
+|     5 | arun  | full_stack |  85000 | 2022-02-16 |
++-------+-------+------------+--------+------------+
+3 rows in set (0.04 sec)
+
+mysql> update employee set salary = salary + 10000 were dept ='full_stack';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'were dept ='full_stack'' at line 1
+mysql> update employee SET salary = salary + 10000 WHERE dept ='full_stack';
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee WHERE dept ='full_stack';
++-------+-------+------------+--------+------------+
+| empid | name  | dept       | salary | join_date  |
++-------+-------+------------+--------+------------+
+|     3 | sri   | full_stack |  80000 | 2019-07-29 |
+|     4 | nawaz | full_stack |  90000 | 2021-03-19 |
+|     5 | arun  | full_stack |  95000 | 2022-02-16 |
++-------+-------+------------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> RENAME table old_table_employee TO new_table_emp;
+ERROR 1146 (42S02): Table 'employee.old_table_employee' doesn't exist
+mysql> RENAME table employee to emp;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> alter table emp;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> rename colum dept to department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'colum dept to department' at line 1
+mysql> RENAME colum dept TO department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'colum dept TO department' at line 1
+mysql> alter table emp
+    -> RENAME colum dept TO department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept TO department' at line 2
+mysql> RENAME colum 'dept' TO 'department';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'colum 'dept' TO 'department'' at line 1
+mysql> ALTER TABLE emp
+    -> RENAME COLUM dept TO department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept TO department' at line 2
+mysql> ALTER TABLE emp
+    -> RENAME colum dept TO department varchar(25);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept TO department varchar(25)' at line 2
+mysql> ALTER TABLE emp
+    -> CHANGE COLUM dept TO department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TO department' at line 2
+mysql> ALTER TABLE emp
+    -> RENAME COLUM dept TO department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept TO department' at line 2
+mysql> ALTER TABLE emp
+    -> CHANGE COLUMN dept department VARCHAR(25);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DELETE FROM emp WHERE empid = 6;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from emp;
++-------+--------+------------+--------+------------+
+| empid | name   | department | salary | join_date  |
++-------+--------+------------+--------+------------+
+|     1 | vivin  | marketing  |  50000 | 2021-03-06 |
+|     2 | harish | hr         |  60000 | 2018-01-09 |
+|     3 | sri    | full_stack |  80000 | 2019-07-29 |
+|     4 | nawaz  | full_stack |  90000 | 2021-03-19 |
+|     5 | arun   | full_stack |  95000 | 2022-02-16 |
++-------+--------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create batabase error;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'batabase error' at line 1
+mysql> create batabase tree;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'batabase tree' at line 1
+mysql> create batabase school
+    -> ();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'batabase school
+()' at line 1
+mysql> create batabase school;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'batabase school' at line 1
+mysql> create database school;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| library            |
+| librarys           |
+| mysql              |
+| performance_schema |
+| school             |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> drop database school;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from emp order by salary desc;
++-------+--------+------------+--------+------------+
+| empid | name   | department | salary | join_date  |
++-------+--------+------------+--------+------------+
+|     5 | arun   | full_stack |  95000 | 2022-02-16 |
+|     4 | nawaz  | full_stack |  90000 | 2021-03-19 |
+|     3 | sri    | full_stack |  80000 | 2019-07-29 |
+|     2 | harish | hr         |  60000 | 2018-01-09 |
+|     1 | vivin  | marketing  |  50000 | 2021-03-06 |
++-------+--------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp where department = 'full_stack' or department = 'hr';
++-------+--------+------------+--------+------------+
+| empid | name   | department | salary | join_date  |
++-------+--------+------------+--------+------------+
+|     2 | harish | hr         |  60000 | 2018-01-09 |
+|     3 | sri    | full_stack |  80000 | 2019-07-29 |
+|     4 | nawaz  | full_stack |  90000 | 2021-03-19 |
+|     5 | arun   | full_stack |  95000 | 2022-02-16 |
++-------+--------+------------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp
+    -> ;
++-------+--------+------------+--------+------------+
+| empid | name   | department | salary | join_date  |
++-------+--------+------------+--------+------------+
+|     1 | vivin  | marketing  |  50000 | 2021-03-06 |
+|     2 | harish | hr         |  60000 | 2018-01-09 |
+|     3 | sri    | full_stack |  80000 | 2019-07-29 |
+|     4 | nawaz  | full_stack |  90000 | 2021-03-19 |
+|     5 | arun   | full_stack |  95000 | 2022-02-16 |
++-------+--------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql>
