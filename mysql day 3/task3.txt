@@ -1,0 +1,28 @@
+mysql> create table store(id int,book varchar(40));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into store
+    -> values (1,'java book'),(2,'python book'),(3,'cpp book'),(4,'javascript book'),(5,'mysql book');
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from store;
++------+-----------------+
+| id   | book            |
++------+-----------------+
+|    1 | java book       |
+|    2 | python book     |
+|    3 | cpp book        |
+|    4 | javascript book |
+|    5 | mysql book      |
++------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from store where book like '%java%';
++------+-----------------+
+| id   | book            |
++------+-----------------+
+|    1 | java book       |
+|    4 | javascript book |
++------+-----------------+
+2 rows in set (0.00 sec)
